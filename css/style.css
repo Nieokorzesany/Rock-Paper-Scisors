@@ -1,0 +1,58 @@
+body {
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.start {
+  background-color: #06b995;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.start h1 {
+  padding: 40px;
+  font-size: 40px;
+  color: white;
+}
+.start button {
+  margin: 30px auto;
+  width: 400px;
+  height: 200px;
+  background: #ffcc00;
+  border-radius: 10px;
+}
+.start img {
+  width: 800px;
+  height: 400px;
+  object-fit: cover;
+  margin: 30px auto;
+}
+
+.game {
+  width: 1000px;
+  height: 100vh;
+  margin: auto;
+  display: block;
+  text-align: center;
+  padding: 70px 0;
+}
+.game .wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+.game .wrapper #rock, .game .wrapper #scissors, .game .wrapper #paper {
+  width: 200px;
+  height: 100px;
+}
+.game .wrapper #score {
+  padding: 50px 0;
+  font-size: 40px;
+}
+
+/*# sourceMappingURL=style.css.map */

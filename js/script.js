@@ -10,12 +10,17 @@ var paper = document.getElementById("paper");
 var scissors = document.getElementById("scissors");
 var reset = document.getElementById("reset");
 var play = document.getElementById("play");
+var start = document.querySelector(".start");
+var game = document.querySelector(".game");
+var whowins = document.querySelector(".whowins");
 
 play.addEventListener("click", function() {
   var rounds = prompt("Please enter the number of rounds");
   var roundsInt = parseInt(rounds);
   roundNumber = roundsInt;
+  start.style.display = "none";
 });
+
 output.innerHTML =
   "Player score: " + playerCount + " Computer score: " + computerCount;
 

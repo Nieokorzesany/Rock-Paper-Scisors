@@ -6,25 +6,33 @@
     <title>RockPaperScissors</title>
   </head>
   <body>
-    <div class="start">
+    <div id="start" class="start">
+      <h1>Rock Paper Scissors</h1>
       <button id="play">Play</button>
+      <img
+        src="https://images.pexels.com/photos/1249214/pexels-photo-1249214.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+        alt="game"
+      />
     </div>
     <div class="game">
-      <h1>Rock Paper Scissors</h1>
-      <div>
+      <div class="wrapper">
         <button id="rock">Rock</button>
-      </div>
-      <div>
         <button id="paper">Paper</button>
-      </div>
-      <div>
         <button id="scissors">Scissors</button>
       </div>
-      <div id="score"></div>
-      <div id="message"></div>
-      <div>
-        <button id="reset">Reset</button>
+      <div id="player">
+        <h1>Computer score</h1>
+        <div class="playerscore"></div>
       </div>
+      <div id="computer">
+        <h1>Computer score</h1>
+        <div class="Computerscore"></div>
+      </div>
+      <div id="message"></div>
+    </div>
+    <div id="reset-div">
+      <div class="whowins"></div>
+      <button id="reset">Reset</button>
     </div>
     <script src="./js/script.js"></script>
   </body>
