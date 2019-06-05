@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  background-color: #06b995;
 }
 
 * {
@@ -23,6 +24,7 @@ body {
     height: 200px;
     background: #ffcc00;
     border-radius: 10px;
+    font-size: 50px;
   }
   img {
     width: 800px;
@@ -36,9 +38,27 @@ body {
   width: 1000px;
   height: 100vh;
   margin: auto;
-  display: block;
+  display: none;
   text-align: center;
   padding: 70px 0;
+  .score {
+    padding: 70px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    color: #ffcc00;
+    h1 {
+      font-size: 60px;
+      font-weight: bold;
+    }
+    .playerscore {
+      font-size: 70px;
+      font-weight: bold;
+    }
+    .computerscore {
+      @extend .playerscore;
+    }
+  }
   .wrapper {
     display: flex;
     flex-direction: row;
@@ -54,9 +74,30 @@ body {
     #scissors {
       @extend #rock;
     }
-    #score {
-      padding: 50px 0;
-      font-size: 40px;
-    }
+  }
+}
+#message {
+  font-size: 60px;
+  font-weight: bold;
+  color: #ffcc00;
+}
+
+#reset-div {
+  display: none;
+  flex-direction: column;
+  text-align: center;
+  .whowins {
+    font-size: 50px;
+    color: white;
+    padding: 70px 0;
+    font-weight: bold;
+  }
+  #reset {
+    margin: 30px auto;
+    width: 300px;
+    height: 150px;
+    background: #ffcc00;
+    border-radius: 10px;
+    font-size: 40px;
   }
 }
