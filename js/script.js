@@ -1,95 +1,119 @@
-var playerPick = 0;
-var computerPick = 0;
-var playerCount = 0;
-var computerCount = 0;
-var roundNumber = 0;
-var message = document.getElementById("message");
-var playerscore = document.querySelector(".playerscore");
-var computerscore = document.querySelector(".computerscore");
-var rock = document.getElementById("rock");
-var paper = document.getElementById("paper");
-var scissors = document.getElementById("scissors");
-var reset = document.getElementById("reset");
-var play = document.getElementById("play");
-var start = document.querySelector(".start");
-var game = document.querySelector(".game");
-var whowins = document.querySelector(".whowins");
-var resetBox = document.getElementById("reset-div");
+var params = {
+  playerPick: 0,
+  computerPick: 0,
+  playerCount: 0,
+  computerCount: 0,
+  roundNumber: 0,
+  message: document.getElementById("message"),
+  playerscore: document.querySelector(".playerscore"),
+  computerscore: document.querySelector(".computerscore"),
+  reset: document.getElementById("reset"),
+  play: document.getElementById("play"),
+  start: document.querySelector(".start"),
+  game: document.querySelector(".game"),
+  whowins: document.querySelector(".whowins"),
+  resetBox: document.querySelector(".bg-modal"),
+  buttonList: document.querySelectorAll(".player-move"),
+  progress: [],
+  numberOfRounds: 0,
+  table: document.querySelector(".table").getElementsByTagName("tbody")[0]
+};
 
-play.addEventListener("click", function() {
-  var rounds = prompt("Please enter the number of rounds");
+params.play.addEventListener("click", function() {
+  while (!rounds) {
+    var rounds = prompt("Please enter the number of rounds");
+  }
   var roundsInt = parseInt(rounds);
-  roundNumber = roundsInt;
+  params.roundNumber = roundsInt;
   numberCheck();
-  start.style.display = "none";
-  game.style.display = "block";
-  resetBox.style.display = "none";
+  params.start.style.display = "none";
+  params.game.style.display = "block";
+  params.resetBox.style.display = "none";
 });
 
 function numberCheck() {
   while (true) {
-    if (roundNumber <= 1) {
+    if (params.roundNumber <= 1) {
       rounds = prompt("Please enter positive number bigger than 1");
       roundsInt = parseInt(rounds);
-      roundNumber = roundsInt;
+      params.roundNumber = roundsInt;
     } else return;
   }
 }
 
-playerscore.innerHTML = playerCount;
-computerscore.innerHTML = computerCount;
+params.playerscore.innerHTML = params.playerCount;
+params.computerscore.innerHTML = params.computerCount;
 
-rock.addEventListener("click", function() {
-  playerMove(1);
+var player;
+
+params.buttonList.forEach(button => {
+  button.addEventListener("click", function() {
+    let choice = parseInt(button.getAttribute("data-move"));
+    playerMove(choice);
+  });
 });
-paper.addEventListener("click", function() {
-  playerMove(2);
+params.reset.addEventListener("click", function() {
+  params.playerCount = 0;
+  params.playerscore.innerHTML = params.playerCount;
+  params.computerCount = 0;
+  params.computerscore.innerHTML = params.computerCount;
+  params.start.style.display = "flex";
+  params.resetBox.style.display = "none";
+  params.game.style.display = "none";
 });
-scissors.addEventListener("click", function() {
-  playerMove(3);
-});
-reset.addEventListener("click", function() {
-  playerCount = 0;
-  playerscore.innerHTML = playerCount;
-  computerCount = 0;
-  computerscore.innerHTML = computerCount;
-  start.style.display = "flex";
-  resetBox.style.display = "none";
-  game.style.display = "none";
+
+params.progress.forEach(element => {
+  let tableRow = table.insertRow(table.rows.length);
+  element.forEach(data => {
+    let newCell = tableRow.insertCell(element.length);
+    newCell.append(data);
+  });
 });
 
 //rock=1, paper=2, scissors=3
 function whoWinsRound() {
-  if (playerPick == computerPick) {
-    message.innerHTML = "Tie";
-  } else if ((playerPick - computerPick + 3) % 3 == 1) {
-    playerCount++;
-    playerscore.innerHTML = playerCount;
-    message.innerHTML = "Player wins round";
+  if (params.playerPick == params.computerPick) {
+    params.message.innerHTML = "Tie";
+  } else if ((params.playerPick - params.computerPick + 3) % 3 == 1) {
+    params.playerCount++;
+    params.playerscore.innerHTML = params.playerCount;
+    params.message.innerHTML = "Player wins round";
   } else {
-    computerCount++;
-    computerscore.innerHTML = computerCount;
-    message.innerHTML = "Computer wins round";
+    params.computerCount++;
+    params.computerscore.innerHTML = params.computerCount;
+    params.message.innerHTML = "Computer wins round";
   }
 }
 
 function whoWinsGame() {
-  if (playerCount >= roundNumber) {
-    game.style.display = "none";
-    resetBox.style.display = "block";
-    start.style.display = "none";
-    whowins.innerHTML = "Player wins";
-  } else if (computerCount >= roundNumber) {
-    game.style.display = "none";
-    resetBox.style.display = "block";
-    start.style.display = "none";
-    whowins.innerHTML = "Computer wins";
+  if (params.playerCount >= params.roundNumber) {
+    params.game.style.display = "none";
+    params.resetBox.style.display = "block";
+    params.start.style.display = "none";
+    params.whowins.innerHTML = "Player wins";
+    params.numberOfRounds = 0;
+    params.progress = [];
+  } else if (params.computerCount >= params.roundNumber) {
+    params.game.style.display = "none";
+    params.resetBox.style.display = "block";
+    params.start.style.display = "none";
+    params.whowins.innerHTML = "Computer wins";
+    params.numberOfRounds = 0;
+    params.progress = [];
   }
 }
 
 function playerMove(move) {
-  playerPick = move;
-  computerPick = Math.floor(Math.random() * 3 + 1);
+  params.playerPick = move;
+  params.computerPick = Math.floor(Math.random() * 3 + 1);
+  params.numberOfRounds++;
   whoWinsRound();
+  params.progress.push([
+    params.numberOfRounds,
+    params.playerPick,
+    params.computerPick,
+    params.message.innerHTML,
+    `${params.playerCount} - ${params.computerCount}`
+  ]);
   whoWinsGame();
 }

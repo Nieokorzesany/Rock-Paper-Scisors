@@ -1,41 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="./css/style.css" />
-    <title>RockPaperScissors</title>
-  </head>
-  <body>
-    <div id="start" class="start">
-      <h1>Rock Paper Scissors</h1>
-      <button id="play">Play</button>
-      <img
-        src="https://images.pexels.com/photos/1249214/pexels-photo-1249214.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-        alt="game"
-      />
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="./css/style.css" />
+  <title>RockPaperScissors</title>
+</head>
+
+<body>
+  <div id="start" class="start">
+    <h1>Rock Paper Scissors</h1>
+    <button id="play">Play</button>
+    <img
+      src="https://images.pexels.com/photos/1249214/pexels-photo-1249214.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      alt="game" />
+  </div>
+  <div class="game">
+    <div class="wrapper">
+      <button id="rock" data-move="1" class="player-move">Rock</button>
+      <button id="paper" data-move="2" class="player-move">Paper</button>
+      <button id="scissors" data-move="3" class="player-move">Scissors</button>
     </div>
-    <div class="game">
-      <div class="wrapper">
-        <button id="rock">Rock</button>
-        <button id="paper">Paper</button>
-        <button id="scissors">Scissors</button>
+    <div class="score">
+      <div id="player">
+        <h1>Player score:</h1>
+        <div class="playerscore"></div>
       </div>
-      <div class="score">
-        <div id="player">
-          <h1>Player score:</h1>
-          <div class="playerscore"></div>
-        </div>
-        <div id="computer">
-          <h1>Computer score:</h1>
-          <div class="computerscore"></div>
-        </div>
+      <div id="computer">
+        <h1>Computer score:</h1>
+        <div class="computerscore"></div>
       </div>
-      <div id="message"></div>
     </div>
-    <div id="reset-div">
-      <div class="whowins"></div>
-      <button id="reset">Reset</button>
+    <div id="message"></div>
+  </div>
+
+  <div class="bg-modal">
+    <div class="modal-contents">
+      <div id="reset-div">
+        <div class="whowins"></div>
+        <table class="table">
+          <thead>
+            <td>Round</td>
+            <td>Player</td>
+            <td>Computer</td>
+            <td>Result</td>
+            <td>Head to head</td>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+        <button id="reset">Reset</button>
+      </div>
     </div>
-    <script src="./js/script.js"></script>
-  </body>
+  </div>
+  <script src="./js/script.js"></script>
+</body>
+
 </html>
