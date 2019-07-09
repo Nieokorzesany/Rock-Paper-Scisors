@@ -38,7 +38,7 @@ body {
   width: 1000px;
   height: 100vh;
   margin: auto;
-  display: none;
+  display: block;
   text-align: center;
   padding: 70px 0;
 }
@@ -79,7 +79,7 @@ body {
   height: 100vh;
   position: fixed;
   top: 0;
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -111,6 +111,10 @@ body {
   background: #ffcc00;
   border-radius: 10px;
   font-size: 40px;
+}
+
+.hide {
+  display: none !important;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -38,7 +38,7 @@ body {
   width: 1000px;
   height: 100vh;
   margin: auto;
-  display: none;
+  display: block;
   text-align: center;
   padding: 70px 0;
   .score {
@@ -88,7 +88,7 @@ body {
   height: 100vh;
   position: fixed;
   top: 0;
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
   .modal-contents {
@@ -120,4 +120,8 @@ body {
       }
     }
   }
+}
+
+.hide {
+  display: none !important;
 }

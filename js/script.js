@@ -16,7 +16,7 @@ var params = {
   buttonList: document.querySelectorAll(".player-move"),
   progress: [],
   numberOfRounds: 0,
-  table: document.querySelector(".table").getElementsByTagName("tbody")[0]
+  table: document.querySelector(".table tbody")
 };
 
 params.play.addEventListener("click", function() {
@@ -26,9 +26,8 @@ params.play.addEventListener("click", function() {
   var roundsInt = parseInt(rounds);
   params.roundNumber = roundsInt;
   numberCheck();
-  params.start.style.display = "none";
-  params.game.style.display = "block";
-  params.resetBox.style.display = "none";
+  params.start.classList.toggle("hide");
+  params.game.classList.toggle("hide");
 });
 
 function numberCheck() {
@@ -57,18 +56,28 @@ params.reset.addEventListener("click", function() {
   params.playerscore.innerHTML = params.playerCount;
   params.computerCount = 0;
   params.computerscore.innerHTML = params.computerCount;
-  params.start.style.display = "flex";
-  params.resetBox.style.display = "none";
-  params.game.style.display = "none";
+  params.start.classList.toggle("hide");
+  params.resetBox.classList.toggle("hide");
+  params.progress = [];
+  clearTable();
 });
 
-params.progress.forEach(element => {
-  let tableRow = table.insertRow(table.rows.length);
-  element.forEach(data => {
-    let newCell = tableRow.insertCell(element.length);
-    newCell.append(data);
+function fillTable() {
+  params.progress.forEach(element => {
+    let row = params.table.insertRow(params.table.rows.length);
+    element.forEach(data => {
+      let cell = document.createElement("td");
+      cell.innerHTML = data;
+      row.appendChild(cell);
+    });
   });
-});
+}
+
+function clearTable() {
+  while (params.table.firstChild) {
+    params.table.removeChild(params.table.firstChild);
+  }
+}
 
 //rock=1, paper=2, scissors=3
 function whoWinsRound() {
@@ -87,19 +96,17 @@ function whoWinsRound() {
 
 function whoWinsGame() {
   if (params.playerCount >= params.roundNumber) {
-    params.game.style.display = "none";
-    params.resetBox.style.display = "block";
-    params.start.style.display = "none";
+    fillTable();
+    params.game.classList.toggle("hide");
+    params.resetBox.classList.toggle("hide");
     params.whowins.innerHTML = "Player wins";
     params.numberOfRounds = 0;
-    params.progress = [];
   } else if (params.computerCount >= params.roundNumber) {
-    params.game.style.display = "none";
-    params.resetBox.style.display = "block";
-    params.start.style.display = "none";
+    fillTable();
+    params.game.classList.toggle("hide");
+    params.resetBox.classList.toggle("hide");
     params.whowins.innerHTML = "Computer wins";
     params.numberOfRounds = 0;
-    params.progress = [];
   }
 }
 
@@ -110,10 +117,20 @@ function playerMove(move) {
   whoWinsRound();
   params.progress.push([
     params.numberOfRounds,
-    params.playerPick,
-    params.computerPick,
+    numToSymbol(params.playerPick),
+    numToSymbol(params.computerPick),
     params.message.innerHTML,
     `${params.playerCount} - ${params.computerCount}`
   ]);
   whoWinsGame();
+}
+
+function numToSymbol(number) {
+  if (number == 1) {
+    return "rock";
+  } else if (number == 2) {
+    return "paper";
+  } else if (number == 3) {
+    return "scissors";
+  }
 }
